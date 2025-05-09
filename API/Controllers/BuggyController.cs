@@ -27,9 +27,16 @@ public class BuggyController(DataContext context) : BaseApiController
     [HttpGet("server-error")]
     public ActionResult<AppUser> GetServerError()
     {
-        var thing = context.User.Find(-1) ?? throw new Exception("A bad thing has happened");
+        try
+        {
+            var thing = context.User.Find(-1) ?? throw new Exception("A bad thing has happened");
 
-        return thing;
+            return thing;
+        }
+        catch(Exception ex)
+        {
+            return StatusCode(500, "Computer says no!");
+        }
     }
 
     [HttpGet("bad-request")]
