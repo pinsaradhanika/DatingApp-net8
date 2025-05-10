@@ -19,9 +19,9 @@ public class BuggyController(DataContext context) : BaseApiController
     public ActionResult<AppUser> GetNotFound()
     {
         var thing = context.User.Find(-1);
-        if( thing == null ) return NotFound();
+        if (thing == null) return NotFound();
 
-        return thing; 
+        return thing;
     }
 
     [HttpGet("server-error")]
